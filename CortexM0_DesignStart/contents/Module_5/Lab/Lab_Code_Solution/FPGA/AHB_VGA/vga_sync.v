@@ -72,7 +72,7 @@ FreqDivider
 );
 
 //Horizontal counter
-GenericCounter  #(.COUNTER_WIDTH(10), .COUNTER_MAX(HorzTimeToFrontPorchEnd))
+GenericCounter  #(.COUNTER_WIDTH(10), .COUNTER_MAX(HorzTimeToFrontPorchEnd-1))
 HorzAddrCounter
 (
 	.CLK(CLK),
@@ -83,7 +83,7 @@ HorzAddrCounter
 );
 
 //Vertical counter
-GenericCounter  #(.COUNTER_WIDTH(10), .COUNTER_MAX(VertTimeToFrontPorchEnd))
+GenericCounter  #(.COUNTER_WIDTH(10), .COUNTER_MAX(VertTimeToFrontPorchEnd-1))
 VertAddrCounter
 (
 	.CLK(CLK),
@@ -113,6 +113,7 @@ always@(posedge CLK) begin
 	else
 		cout <= 8'b00000000;
 end
+
 
 //output horizontal and vertical addresses 
 always@(posedge CLK)begin
