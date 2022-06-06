@@ -48,7 +48,8 @@ module dual_port_ram_sync
   input wire [DATA_WIDTH-1:0] din_a,
   
   output wire [DATA_WIDTH-1:0] dout_a,
-  output wire [DATA_WIDTH-1:0] dout_b
+  output wire [DATA_WIDTH-1:0] dout_b,
+  output wire                  reset_done
   );
 
   reg [DATA_WIDTH-1:0] ram [2**ADDR_WIDTH-1:0];
@@ -75,9 +76,14 @@ module dual_port_ram_sync
       ram[we ? addr_a : reset_addr] <= we ? din_a : {DATA_WIDTH{1'b0}};
     addr_a_reg <= addr_a;
     addr_b_reg <= addr_b;
+
+//       ram[addr_a] <= din_a;
+//       addr_a_reg <= addr_a;
+//       addr_b_reg <= addr_b;
   end
   
   assign dout_a = ram[addr_a_reg];
   assign dout_b = ram[addr_b_reg];
+  assign reset_done = reset_addr[ADDR_WIDTH];
   
 endmodule

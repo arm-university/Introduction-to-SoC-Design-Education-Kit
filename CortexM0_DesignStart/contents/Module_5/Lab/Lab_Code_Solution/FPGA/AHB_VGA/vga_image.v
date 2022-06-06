@@ -43,7 +43,8 @@ module vga_image(
   input wire image_we,
   input wire [7:0] image_data,
   input wire [15:0] address,
-  output wire [7:0] image_rgb
+  output wire [7:0] image_rgb,
+  output wire reset_done
   );
 
 
@@ -72,7 +73,8 @@ module vga_image(
     .addr_b(addr_r),
     .din_a(din),
     .dout_a(),
-    .dout_b(dout)
+    .dout_b(dout),
+    .reset_done(reset_done)
   ); 
 
   assign addr_w = address_reg[14:0];
@@ -81,7 +83,7 @@ module vga_image(
   assign img_x = pixel_x[9:0]-240;
   assign img_y = pixel_y[9:0];
   		
-  assign addr_r = {1'b0,img_y[8:2], img_x[8:2]}; 
+  assign addr_r = {1'b0,img_y[8:2], img_x[8:2]};
   
   assign image_rgb = dout;
 

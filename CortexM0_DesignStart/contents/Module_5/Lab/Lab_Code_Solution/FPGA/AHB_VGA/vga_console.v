@@ -45,7 +45,8 @@ module vga_console(
   input wire [7:0] font_data, //input 8-bit ascii value
   
   output reg [7:0] text_rgb,  //output color
-  output reg scroll           //signals scrolling
+  output reg scroll,           //signals scrolling
+  output wire reset_done
 );
 
   //Screen tile parameters
@@ -112,7 +113,8 @@ module vga_console(
     .addr_b(addr_r),
     .din_a(din),
     .dout_a(),
-    .dout_b(dout)
+    .dout_b(dout),
+    .reset_done(reset_done)
   );
   
   //State Machine for cursor and pixel buffer

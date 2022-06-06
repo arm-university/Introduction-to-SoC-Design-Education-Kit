@@ -66,12 +66,15 @@ module AHBVGA(
   wire [9:0] pixel_x;     //current x pixel
   wire [9:0] pixel_y;     //current y pixel
   
+  wire console_reset_done;//console module reset done
   reg console_write;      //write to console
   reg [7:0] console_wdata;//data to write to console
   reg image_write;        //write to image
   reg [7:0] image_wdata;  //data to write to image
   
   wire [7:0] image_rgb;   //image color
+  
+  wire image_reset_done;  //image module reset complete
   
   wire scroll;            //scrolling signal
   
@@ -89,8 +92,10 @@ module AHBVGA(
       last_HTRANS <= HTRANS;
     end
     
-  //Give time for the screen to refresh before writing
-  assign HREADYOUT = ~scroll;   
+  // Give time for the RAMs to complete their reset, otherwise
+  // the reset sequence may override any new data written
+  // Give time for the screen to refresh before writing
+  assign HREADYOUT = image_reset_done & console_reset_done & ~scroll;   
  
   //VGA interface: control the synchronization and color signals for a particular resolution
   VGAInterface uVGAInterface (
@@ -112,7 +117,8 @@ module AHBVGA(
     .text_rgb(console_rgb),
     .font_we(console_write),
     .font_data(console_wdata),
-    .scroll(scroll)
+    .scroll(scroll),
+    .reset_done(console_reset_done)
     );
   
   //VGA image buffer: output the pixels in the image region
@@ -124,7 +130,8 @@ module AHBVGA(
     .pixel_y(pixel_y),
     .image_we(image_write),
     .image_data(image_wdata),
-    .image_rgb(image_rgb)
+    .image_rgb(image_rgb),
+    .reset_done(image_reset_done)
     );
 
   assign sel_console = (last_HADDR[23:0]== 12'h000000000000);
