@@ -363,6 +363,7 @@
         {
             "title": "Applicaiton Programming Interface and Final Application, Module 11, Lab 8",
             "subject": ["arm", "fpga", "cortex-m", "cmsis", "hardware-designs", "amba", "soc", "arm-cortex-m0", "soc-design", "system-on-chip-design", "keil-mdk", "design-start", "system-on-chip"],
+            "type": "Lab",
             "format": "doc",
             "creator": "Oyinkuro Benafa",
             "publisher": "Arm Education",
