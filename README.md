@@ -1,9 +1,12 @@
-
 # Introduction-to-System-on-Chip-Design-Education-Kit
 
-Welcome to our Introduction to System on Chip Design Education Kit!
+## Important
+### To download the latest stable version, please click below instead of using the "Download ZIP" button.
+### [Click here to download](https://github.com/arm-university/Introduction-to-SoC-Design-Education-Kit/releases/download/v2.0.0/Introduction-to-SoC-Design-Education-Kit.zip)
 
-### [Download the EdKit here](https://github.com/arm-university/Introduction-to-SoC-Design-Education-Kit/archive/refs/heads/main.zip)
+## About
+
+Welcome to our Introduction to System on Chip Design Education Kit!
 
 Our flagship offering to universities worldwide is the Arm University Program Education Kit series.
 
